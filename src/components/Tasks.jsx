@@ -169,7 +169,7 @@ const Tasks = () => {
 			<Box className='my-2 overflow-y-scroll h-96'>
 				{
 					
-					allTasks?.map(task => (
+					allTasks&&allTasks.map(task => (
 					<Badge
 						key={task._id}
 						badgeContent=''
