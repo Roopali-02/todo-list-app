@@ -39,7 +39,18 @@ const Tasks = () => {
 	}, [checkedTasks])
 	
 	useEffect(()=>{
-		axios.get('/api/tasks').then(response =>setAllTasks(response.data));
+		axios.get('/api/tasks')
+			.then(response => {
+				if (Array.isArray(response.data)) {
+					setAllTasks(response.data);
+				} else {
+					setAllTasks([]); // Fallback to empty array if the response isn't an array
+				}
+			})
+			.catch(error => {
+				console.error('Error fetching tasks:', error);
+				setAllTasks([]); // Fallback in case of an error
+			});
 	},[])
 
 	const handleChange = (taskId) => {
